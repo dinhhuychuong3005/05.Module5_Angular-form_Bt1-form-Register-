@@ -70,7 +70,8 @@
       <p *ngIf="register.get('phone').errors?.pattern">Không đúng định dạng</p>
     </div>
     <div class="mb-3">
-      <button type="submit" [disabled]="register.invalid" (click)="onSubmit()" class="btn btn-primary">Sign in</button>
+      <button type="submit" [disabled]=" !((register.valid) && (register.value.password == register.value.confirmPassword))" (click)="onSubmit()" class="btn btn-primary">Sign in</button>
     </div>
   </form>
 </div>
+
