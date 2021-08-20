@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <form class="row g-2" [formGroup]="register">
+    <div class="mb-3">
+      <label for="inputEmail4" class="form-label">Email</label>
+      <input type="email" class="form-control" id="inputEmail4" formControlName="email">
+      <div
+        *ngIf="register.get('email').invalid && (register.get('email').dirty || register.get('email').touched)"
+        class="message">
+        <div [hidden]="register.get('email').errors.required">email is required</div>
+        <div [hidden]="register.get('email').errors.email">email k đúng định dạng</div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="inputPassword4" class="form-label">Password</label>
+      <input type="text" class="form-control" id="inputPassword4" formControlName="password">
+
+      <div
+        *ngIf="register.get('password').invalid && (register.get('password').dirty || register.get('password').touched)"
+        class="message">
+        <div [hidden]="register.get('password').errors.required">password is required</div>
+        <div [hidden]="register.get('password').errors.minLength">password length is greater than 6 characters</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="inputAddress" class="form-label">ConfirmPassword</label>
+      <input type="text" class="form-control" id="inputAddress" formControlName="confirmPassword"
+             placeholder="1234 Main St">
+      <div
+        *ngIf="register.get('confirmPassword').invalid && (register.get('confirmPassword').dirty || register.get('confirmPassword').touched)"
+        class="message">
+        <div [hidden]="register.get('confirmPassword').errors.required">password is required</div>
+        <div [hidden]="register.get('confirmPassword').errors.minLength">password length is greater than 6 characters
+        </div>
+
+      </div>
+      <div *ngIf="register.value.password != register.value.confirmPassword" class="message">No</div>
+    </div>
+    <div class="mb-3">
+      <label for="inputState1" class="form-label">Country</label>
+      <select id="inputState1" class="form-select" formControlName="country">
+        <option>Chọn</option>
+
+        <option value="vn">Việt Nam</option>
+        <option value="us">US</option>
+      </select>
+      <div class="alert alert-danger" role="alert" *ngIf="register.get('country').invalid && register.get('country').touched">
+        Country is required!
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="inputCity" class="form-label">Age</label>
+      <input type="number" class="form-control" id="inputCity" formControlName="age">
+      <p *ngIf="register.get('age').errors?.min">Tuổi từ 18 trở lên</p>
+    </div>
+    <div class="mb-3">
+      <label class="form-label me-5">Gender</label>
+      <input class="form-check-input" type="radio"  id="flexRadioDefault1" formControlName="gender"
+             value="male" [checked]="true">Male
+      <input class="form-check-input" type="radio"  id="flexRadioDefault2" formControlName="gender"
+             value="female">Female
+      <input class="form-check-input" type="radio"  id="flexRadioDefault3" formControlName="gender"
+             value="others">Others
+
+    </div>
+    <div class="mb-3">
+      <label for="inputZip" class="form-label">Phone</label>
+      <input type="text" class="form-control" id="inputZip" formControlName="phone">
+      <p *ngIf="register.get('phone').errors?.pattern">Không đúng định dạng</p>
+    </div>
+    <div class="mb-3">
+      <button type="submit" [disabled]="register.invalid" (click)="onSubmit()" class="btn btn-primary">Sign in</button>
+    </div>
+  </form>
+</div>
